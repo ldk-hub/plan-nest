@@ -1,4 +1,4 @@
-package com.plan.plan_nest;
+package com.plan.nest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
