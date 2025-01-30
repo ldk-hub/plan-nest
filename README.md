@@ -1,8 +1,6 @@
-# 2025 개발 계획 포트폴리오 목표
-# 프로젝트명 : plan-nest
+# 프로젝트명 : plan-nest 포트폴리오 소개
  - 포트폴리오 - 여행 &amp; 부동산 등 계획이 모이는 통합 플랫폼
  - 여행, 부동산 등 각종 계획을 하나의 사이트에서 관리할 수 있는 통합플랫폼 구축을 목표로 개발
-
 
 ### 개발스택
  - front-end : react
@@ -13,6 +11,7 @@
  - monitoring : Prometheus, Grafana
  - CI/CD : github actions
  - container : docker
+ - TOOL : sourcetree, postman, git
 
 ### 모니터링 파트
 | **모니터링 종류**     | **설명**                                   | **추천 솔루션**                                            |
@@ -24,3 +23,11 @@
 ### OPEN API 연계 파트
 - OAuth 2.0 로그인 : 네이버, 카카오
 - 여행관련 API : Google Places API, Weatherstack API
+
+
+
+
+## 프로메테우스 관련
+ - http://localhost:8080/actuator/prometheus 경로로 접속하여 메트릭정보를 조회할 수 있다.
+ - 메트릭 테스트용 엔드포인트를 컨트롤러 내 구성하여 확인. http://localhost:8080/metric/test
+ - 추가 과정에서 스프링시큐리티 구성하였음.
