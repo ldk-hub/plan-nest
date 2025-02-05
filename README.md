@@ -5,7 +5,7 @@
 ### 개발스택
  - front-end : react
  - back-end : java, spring boot, spring security, Spring Boot Actuator, jpa, querydsl, junit
- - database : mysql
+ - database : mysql, redis, clickhouse
 
 ### 라이브러리(추가예정)
  - monitoring : Prometheus, Grafana
@@ -24,10 +24,9 @@
 - OAuth 2.0 로그인 : 네이버, 카카오
 - 여행관련 API : Google Places API, Weatherstack API
 
-
-
-
 ## 프로메테우스 관련
  - http://localhost:8080/actuator/prometheus 경로로 접속하여 메트릭정보를 조회할 수 있다.
  - 메트릭 테스트용 엔드포인트를 컨트롤러 내 구성하여 확인. http://localhost:8080/metric/test
  - 추가 과정에서 스프링시큐리티 구성하였음.
+
+## 레디스 관련
