@@ -1,34 +1,43 @@
 package com.plan.nest.config;
 
+import com.plan.nest.service.CustomOauth2UserService;
+import com.plan.nest.service.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final CustomUserDetailsService customUserDetailsService; // 기본 세션 로그인
+    private final CustomOauth2UserService customOAuth2UserService; // OAuth2 등록
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // Prometheus 및 메트릭 엔드포인트에 대한 인증 허용
+                        .requestMatchers("/actuator/**", "/public/**").permitAll() // Prometheus 및 공개 엔드포인트 허용
                         .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults()) // 기본 로그인 페이지 활성화
-                .httpBasic(Customizer.withDefaults()); // 기본 HTTP Basic 인증 사용
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/home", true)
+                        .failureUrl("/login?error=true")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                );
 
         return http.build();
     }
