@@ -7,8 +7,8 @@ spring:
       client:
         registration:
           naver:
-            client-id:
-            client-secret: 
+            client-id: 1Z_TnptJooFkkPoFvLt7
+            client-secret: JveMcf1LiX
             redirect-uri: http://localhost:8080/login/oauth2/code/naver
             client-name: Naver
             authorization-grant-type: authorization_code
@@ -26,7 +26,6 @@ spring:
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
-
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,24 +22,19 @@ public class SecurityConfig {
     private final CustomOauth2UserService customOAuth2UserService; // OAuth2 등록
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/**", "/public/**").permitAll() // Prometheus 및 공개 엔드포인트 허용
-                        .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login?error=true")
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                );
-
+            .csrf(AbstractHttpConfigurer::disable)
+            .headers((headers) -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/**").permitAll()
+                    .anyRequest().authenticated())
+            .logout((logout) -> logout
+                    .logoutSuccessUrl("/"))
+            .oauth2Login((oauth2) -> oauth2
+                    .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                            .userService(customOAuth2UserService))
+                    .defaultSuccessUrl("/", true));
         return http.build();
     }
 
