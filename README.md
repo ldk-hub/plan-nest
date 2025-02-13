@@ -29,4 +29,6 @@
  - 메트릭 테스트용 엔드포인트를 컨트롤러 내 구성하여 확인. http://localhost:8080/metric/test
  - 추가 과정에서 스프링시큐리티 구성하였음.
 
-## 레디스 관련
+## 개발완료내역
+ - naver OAuth2.0 Login api 인증 테스트 완료
+ - http://localhost:8080/oauth2/authorization/naver 로 로그인 시
