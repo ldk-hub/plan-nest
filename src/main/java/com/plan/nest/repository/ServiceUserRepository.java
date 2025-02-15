@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ServiceUserRepository extends JpaRepository<ServiceUser, Long> {
-    Optional<ServiceUser> findByUsername(String username);
-
     Optional<ServiceUser> findByProviderAndProviderId(String provider, String providerId);
 }
