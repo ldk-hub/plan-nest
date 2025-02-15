@@ -17,6 +17,10 @@ public class ServiceUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+
+    @Column(nullable = false)
+    private String nickname;
+
     @Setter
     @Column(name="email")
     private String email;
@@ -29,9 +33,6 @@ public class ServiceUser {
 
     @Column(name= "password")
     private String password;
-
-    @Column(name="username")
-    private String username;
 
     @CreatedDate
     @Column(name = "created_date")

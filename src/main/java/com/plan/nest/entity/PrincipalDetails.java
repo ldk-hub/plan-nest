@@ -30,8 +30,9 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return serviceUser.getUsername();
+        return "";
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
