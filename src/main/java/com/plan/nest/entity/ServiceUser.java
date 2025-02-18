@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
 public class ServiceUser {
 
     @Id
@@ -37,4 +36,13 @@ public class ServiceUser {
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
+
+    @Builder
+    public ServiceUser(String nickname, String email, String provider, String providerId) {
+        this.nickname = nickname;
+        this.email = email;
+        this.provider = provider;
+        this.providerId = providerId;
+    }
 }

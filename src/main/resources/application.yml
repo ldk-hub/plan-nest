@@ -7,8 +7,8 @@ spring:
       client:
         registration:
           naver:
-            client-id:
-            client-secret:
+            client-id: 1Z_TnptJooFkkPoFvLt7
+            client-secret: JveMcf1LiX
             scope:
               - nickname
               - email

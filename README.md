@@ -5,7 +5,7 @@
 ### 개발스택
  - front-end : react
  - back-end : java, spring boot, spring security, Spring Boot Actuator, jpa, querydsl, junit
- - database : mysql, redis, clickhouse
+ - database : mysql, redis
 
 ### 라이브러리(추가예정)
  - monitoring : Prometheus, Grafana
@@ -20,15 +20,17 @@
 | **트래픽 모니터링**     | HTTP 요청 수, 상태 코드, API 응답 시간      | `Prometheus + Nginx Exporter or Blackbox Exporter` |
 | **컨테이너 모니터링**   | Docker 컨테이너 리소스 사용량               | `cAdvisor + Prometheus + Grafana` |
 
-### OPEN API 연계 파트
-- OAuth 2.0 로그인 : 네이버, 카카오
-- 여행관련 API : Google Places API, Weatherstack API
-
-## 프로메테우스 관련
- - http://localhost:8080/actuator/prometheus 경로로 접속하여 메트릭정보를 조회할 수 있다.
- - 메트릭 테스트용 엔드포인트를 컨트롤러 내 구성하여 확인. http://localhost:8080/metric/test
- - 추가 과정에서 스프링시큐리티 구성하였음.
+## 개발 예정 순서
+ - 단위 테스트 코드 구성
+ - BE 로그인 프로세스 엔드포인트 및 테스트 코드 작성
+ - FE react 로그인 프로세스 
+ - 메인 대시보드 화면 개발(템플릿 발굴)
+ - 회원 정보 페이지
+ - kpi 통계 산출 페이지
+ - 도커, 깃허브액션
+ - 비즈니스 로직 테스트 코드 구현
 
 ## 개발완료내역
  - naver OAuth2.0 Login api 인증 테스트 완료
- - http://localhost:8080/oauth2/authorization/naver 로 로그인 시
+ - http://localhost:8080/oauth2/authorization/naver 로 로그인 시 네이버 2차인증 로그인으로 랜딩
+
