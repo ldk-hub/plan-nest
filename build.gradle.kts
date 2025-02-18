@@ -34,9 +34,10 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("io.micrometer:micrometer-registry-prometheus")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework:spring-test") 
 }
 
 tasks.withType<Test> {
