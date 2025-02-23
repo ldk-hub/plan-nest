@@ -28,7 +28,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
 
         OAuth2Response oAuth2Response = extractOAuth2Response(registrationId, oAuth2User);
         if (oAuth2Response == null) {
-            log.error("지원되지 않는 OAuth2 공급자: {}", registrationId);
+            log.error("에러 발생 : {}", registrationId);
             throw new OAuth2AuthenticationException("지원되지 않는 OAuth2 공급자입니다.");
         }
 
@@ -47,7 +47,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     private ServiceUser findOrCreateUser(OAuth2Response oAuth2Response) {
         return serviceUserRepository.findByProviderAndProviderId(oAuth2Response.getProvider(), oAuth2Response.getProviderId())
                 .map(user -> {
-                    user.setEmail(oAuth2Response.getEmail()); // 이메일 변경 가능
+                    user.setEmail(oAuth2Response.getEmail());
                     return user;
                 })
                 .orElseGet(() -> {
