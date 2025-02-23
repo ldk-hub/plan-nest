@@ -20,8 +20,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         return User.withUsername("admin")
-                .password(passwordEncoder.encode("password")) // @Bean으로 주입받음
-                .roles("USER", "ADMIN") // 확장 가능하도록 변경
+                .password(passwordEncoder.encode("password"))
+                .roles("USER", "ADMIN")
                 .build();
     }
 }
