@@ -1,4 +1,4 @@
-# 프로젝트명 : plan-nest 포트폴리오 소개
+# 프로젝트명 : plan-nest 포트폴리오
  - 포트폴리오 - 여행 &amp; 부동산 등 계획이 모이는 통합 플랫폼
  - 여행, 부동산 등 각종 계획을 하나의 사이트에서 관리할 수 있는 통합플랫폼 구축을 목표로 개발
 
@@ -12,6 +12,7 @@
  - CI/CD : github actions
  - container : docker
  - TOOL : sourcetree, postman, git
+ - mem-cache : redis
 
 ### 모니터링 파트
 | **모니터링 종류**     | **설명**                                   | **추천 솔루션**                                            |
@@ -21,6 +22,7 @@
 | **컨테이너 모니터링**   | Docker 컨테이너 리소스 사용량               | `cAdvisor + Prometheus + Grafana` |
 
 ## 개발 예정 순서
+ - 레디스 구성, TTL 설정 또는 이벤트 트리거 추가
  - 단위 테스트 코드 구성
  - BE 로그인 프로세스 엔드포인트 및 테스트 코드 작성
  - FE react 로그인 프로세스 
