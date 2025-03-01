@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login/**", "/css/**", "/js/**", "/img/**").permitAll()
+                        .requestMatchers("/**", "/login/**", "/css/**", "/js/**", "/img/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
