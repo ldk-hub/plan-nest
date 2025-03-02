@@ -34,5 +34,28 @@
 
 ## 개발완료내역
  - naver OAuth2.0 Login api 인증 테스트 완료
- - http://localhost:8080/oauth2/authorization/naver 로 로그인 시 네이버 2차인증 로그인으로 랜딩
+ - http://localhost:8080/oauth2/authorization/naver 로 로그인 시 네이버 2차인증 로그인으로 랜딩 완료
+ - redis config 설정 완료 및 캐싱구성 완료
+ - k6 부하테스트 진행 시 20배 빨라짐 확인
 
+
+## K6 부하테스트 요령
+ - 테스트 시나리오 redis 캐싱처리 적용 전 1회 수행
+```
+script.js
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+export let options = {
+vus: 30, // 동시 사용자 30명
+duration: '10s', // 테스트 지속 시간 10초
+};
+
+export default function () {
+http.get('http://localhost:8080/boards');
+sleep(1);
+}
+```
+ - redis 캐싱처리 적용 후 1회 수행 후 속도 비교
+
+   ![화면 캡처 2025-03-02 171113.png](..%2F%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202025-03-02%20171113.png)
