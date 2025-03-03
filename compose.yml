@@ -1,22 +1,20 @@
-version: '3.8'
-
 services:
-  app:
-    image: openjdk:17
-    container_name: plan-nest-app
-    restart: always
+  api-server:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/plan-nest
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/plan-nest
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
     depends_on:
       - db
+      - cache-server
     networks:
       - backend
 
@@ -35,8 +33,24 @@ services:
     networks:
       - backend
 
+  cache-server:
+    image: redis
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 10
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+
 volumes:
   db-data:
+  redis-data:
 
 networks:
   backend:
