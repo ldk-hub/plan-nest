@@ -17,6 +17,7 @@ public class ServiceUser {
     @Column(name="id")
     private Long id;
 
+    @Setter
     @Column(nullable = false)
     private String nickname;
 
@@ -30,19 +31,19 @@ public class ServiceUser {
     @Column(name= "provider_id")
     private String providerId;
 
-    @Column(name= "password")
-    private String password;
-
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
 
     @Builder
-    public ServiceUser(String nickname, String email, String provider, String providerId) {
+    public ServiceUser(Long id, String nickname, String email, String provider, String providerId) {
+        this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.provider = provider;
         this.providerId = providerId;
     }
+
+
 }

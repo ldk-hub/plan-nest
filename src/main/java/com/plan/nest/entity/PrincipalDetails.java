@@ -25,8 +25,9 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null; // OAuth2 로그인에서는 비밀번호가 필요 없음
+        return "";
     }
+
 
     @Override
     public String getUsername() {

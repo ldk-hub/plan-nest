@@ -12,11 +12,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("redis-test")
+@RequestMapping("/api/dashboard")
 public class DashboardController {
 
     private final DashBoardService dashBoardService;
-
 
     @GetMapping
     public List<Board> getBoards(
@@ -24,4 +23,5 @@ public class DashboardController {
     ) {
         return dashBoardService.getBoards(page, size);
     }
+
 }
