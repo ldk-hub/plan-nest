@@ -15,6 +15,7 @@
  - mem-cache : redis
 
 ## 개발 예정 순서
+ - webflux mono flux 기반 실시간 채팅기능 추가
  - 단위 테스트 코드 구성
  - BE 로그인 프로세스 엔드포인트 및 테스트 코드 작성
  - FE react 로그인 프로세스 
