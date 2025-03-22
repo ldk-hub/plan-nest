@@ -1,6 +1,7 @@
 package com.plan.nest.component;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -9,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ChatWebSocketHandler implements WebSocketHandler {
@@ -21,11 +22,14 @@ public class ChatWebSocketHandler implements WebSocketHandler {
         // 클라이언트로부터 수신된 메시지를 Sinks에 전달
         Mono<Void> input = session.receive()
                 .map(WebSocketMessage::getPayloadAsText)
-                .doOnNext(chatSink::tryEmitNext)
+                .doOnNext(message -> {
+                    log.info("Received: {}", message);
+                    chatSink.tryEmitNext(message);
+                })
                 .then();
 
         // Sinks에서 데이터를 구독하여 클라이언트에 전송
-        Flux<String> outputMessages = chatSink.asFlux();
+        Flux<String> outputMessages = chatSink.asFlux().doOnCancel(() -> log.info("Client disconnected"));
         Mono<Void> output = session.send(outputMessages.map(session::textMessage));
 
         return Mono.zip(input, output).then();
