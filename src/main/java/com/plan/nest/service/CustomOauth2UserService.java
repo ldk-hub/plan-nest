@@ -41,7 +41,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             Map<String, Object> responseMap = (Map<String, Object>) oAuth2User.getAttributes().get("response");
             return new NaverResponse(responseMap);
         }
-        return null;
+        throw new OAuth2AuthenticationException("지원되지 않는 OAuth2 공급자: " + registrationId);
     }
 
     private ServiceUser findOrCreateUser(OAuth2Response oAuth2Response) {

@@ -1,23 +1,26 @@
 package com.plan.nest.config;
 
 import com.plan.nest.component.ChatWebSocketHandler;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.reactive.HandlerMapping;
+import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+
+import java.util.Map;
 
 @Configuration
 @EnableWebSocket
-@RequiredArgsConstructor
-public class WebsocketConfig implements WebSocketConfigurer {
+public class WebsocketConfig {
 
-    private final ChatWebSocketHandler chatWebSocketHandler;
+    @Bean
+    public HandlerMapping webSocketMapping(ChatWebSocketHandler chatWebSocketHandler) {
+        return new SimpleUrlHandlerMapping(Map.of("/ws/chat", chatWebSocketHandler), -1);
+    }
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler((WebSocketHandler) chatWebSocketHandler, "/ws/chat")
-                .setAllowedOrigins("*");
+    @Bean
+    public WebSocketHandlerAdapter handlerAdapter() {
+        return new WebSocketHandlerAdapter();
     }
 }
