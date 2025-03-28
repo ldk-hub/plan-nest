@@ -12,7 +12,6 @@
  - CI/CD : github actions
  - container : docker
  - TOOL : sourcetree, postman, git
- - mem-cache : redis
 
 ## 개발 예정 순서
  - webflux mono flux 기반 실시간 채팅기능 추가
@@ -33,8 +32,6 @@
  - 레디스 구성, TTL 설정 또는 이벤트 트리거 추가
  - 도커 compose 구성 완료
 
-
-
 # 개발 수행 내역
 
 ## 도커 
@@ -48,10 +45,8 @@
 | **모니터링 종류**     | **설명**                                   | **추천 솔루션**                                            |
 |------------------|--------------------------------|--------------------------------------------------|
 | **애플리케이션 모니터링** | API 응답 속도, 에러율, DB 성능            | `Spring Boot Actuator + Micrometer + Prometheus + Grafana` |
-| **트래픽 모니터링**     | HTTP 요청 수, 상태 코드, API 응답 시간      | `Prometheus + Nginx Exporter or Blackbox Exporter` |
-| **컨테이너 모니터링**   | Docker 컨테이너 리소스 사용량               | `cAdvisor + Prometheus + Grafana` |
 
-## K6 부하테스트
+## 레디스 도입 성능 개선 체크 K6 부하테스트
 - 테스트 시나리오 redis 캐싱처리 적용 전 1회 수행
 ```
 script.js
@@ -70,8 +65,5 @@ sleep(1);
 ```
 - redis 캐싱처리 적용 후 1회 수행 후 속도 비교
 
-
-
 ## 이슈 케이스
  - 웹, 웹소켓 동시 사용시 스프링시큐리티 충돌이슈 발생으로 인하여 web, websocket 모듈분리 작업 진행 중
-
