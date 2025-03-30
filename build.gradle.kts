@@ -23,7 +23,14 @@ repositories {
 	mavenCentral()
 }
 
+subprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
 dependencies {
+	implementation(project(":websocket"))
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-authorization-server")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")

@@ -1,4 +1,3 @@
-package com.plan.nest.chat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.socket.WebSocketMessage;

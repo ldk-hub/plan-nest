@@ -1,27 +1,23 @@
 package com.plan.nest.config;
 
 import com.plan.nest.component.ChatWebSocketHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.reactive.config.EnableWebFlux;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.web.reactive.socket.server.support.HandshakeWebSocketService;
+import org.springframework.web.reactive.socket.server.upgrade.ReactorNettyRequestUpgradeStrategy;
 
 @Configuration
-@EnableWebSocket
-public class WebsocketConfig implements WebSocketConfigurer {
+@RequiredArgsConstructor
+public class WebsocketConfig  implements WebFluxConfigurer {
 
     private final ChatWebSocketHandler chatWebSocketHandler;
 
-    @Autowired
-    public WebsocketConfig(ChatWebSocketHandler chatWebSocketHandler) {
-        this.chatWebSocketHandler = chatWebSocketHandler;
+    @Bean
+    public HandshakeWebSocketService webSocketService() {
+        return new HandshakeWebSocketService(new ReactorNettyRequestUpgradeStrategy());
     }
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler((WebSocketHandler) chatWebSocketHandler, "/ws/chat")
-                .setAllowedOrigins("*");  // CORS 문제 해결
-    }
 }
