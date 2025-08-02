@@ -31,6 +31,7 @@
  - k6 부하테스트 진행 시 20배 빨라짐 확인
  - 레디스 구성, TTL 설정 또는 이벤트 트리거 추가
  - 도커 compose 구성 완료
+ - CodeRabbit 자동 코드 리뷰 시스템 구축 완료
 
 # 개발 수행 내역
 
@@ -67,3 +68,22 @@ sleep(1);
 
 ## 이슈 케이스
  - 웹, 웹소켓 동시 사용시 스프링시큐리티 충돌이슈 발생으로 인하여 web, websocket 모듈분리 작업 진행 중
+
+## CodeRabbit 자동 코드 리뷰
+
+### 설정된 기능
+- **자동 코드 리뷰**: Spring Boot 모범 사례, 보안, 성능 최적화 검토
+- **테스트 생성**: JUnit 기반 테스트 코드 자동 생성
+- **코드 개선**: 리팩토링 제안 및 성능 최적화 방안 제시
+- **문서화**: 코드 문서 자동 생성 및 업데이트
+- **보안 검사**: OAuth2, WebSocket, Redis 관련 보안 취약점 검사
+
+### 사용 방법
+1. **CodeRabbit 앱 설치**: https://github.com/apps/coderabbit 에서 저장소에 설치
+2. **PR 생성**: 새로운 브랜치에서 코드 변경 후 PR 생성
+3. **자동 리뷰**: CodeRabbit이 자동으로 코드를 분석하고 리뷰 코멘트 작성
+4. **개선사항 적용**: 제안된 개선사항을 검토하고 적용
+
+### 설정 파일
+- `.coderabbit.yaml`: CodeRabbit 설정 파일
+- `.github/workflows/code-review.yml`: GitHub Actions 워크플로우
