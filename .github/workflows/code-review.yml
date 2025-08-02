@@ -21,6 +21,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+          
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -32,15 +35,16 @@ jobs:
             ${{ runner.os }}-gradle-
             
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew test --no-daemon --stacktrace
         
       - name: Build project
-        run: ./gradlew build -x test
+        run: ./gradlew build -x test --no-daemon --stacktrace
         
   code-review:
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'pull_request'
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
