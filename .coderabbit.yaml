@@ -1,5 +1,6 @@
 # CodeRabbit Configuration for Spring Boot Project
 # This file configures CodeRabbit for automated code review
+# 한국어 피드백 설정
 
 # Enable features
 review:
@@ -29,6 +30,10 @@ languages:
     enabled: true
     test_framework: junit
     framework: gradle
+
+# 한국어 피드백 설정
+language: ko
+feedback_style: korean
 
 # Project specific settings
 project:
@@ -62,9 +67,10 @@ patterns:
     - "**/.git/**"
     - "**/prometheus/**"
 
-# Custom review prompts
+# Custom review prompts (한국어)
 custom_prompts:
   review:
+    - "모든 리뷰 코멘트는 한국어로 작성해주세요."
     - "Spring Boot 3.4.2 모범 사례를 준수하는지 확인해주세요."
     - "OAuth2, Spring Security 설정의 보안 취약점을 검토해주세요."
     - "JPA/Hibernate 사용 시 성능 최적화가 필요한 부분을 확인해주세요."
@@ -72,33 +78,37 @@ custom_prompts:
     - "WebSocket 모듈 분리로 인한 보안 설정이 올바른지 확인해주세요."
     - "Docker 컨테이너화가 적절히 구성되었는지 확인해주세요."
     - "Actuator 엔드포인트 보안이 적절히 설정되었는지 확인해주세요."
+    - "코드 품질과 가독성을 중점적으로 검토해주세요."
+    - "한국 개발자들이 이해하기 쉽게 설명해주세요."
   
   improve:
+    - "모든 개선 제안은 한국어로 작성해주세요."
     - "Spring Boot 애플리케이션의 성능을 개선할 수 있는 방법을 제안해주세요."
     - "더 나은 설계 패턴을 적용할 수 있는 부분을 찾아주세요."
     - "코드 리팩토링이 필요한 부분을 제안해주세요."
     - "보안을 강화할 수 있는 방법을 제안해주세요."
     - "테스트 커버리지를 높일 수 있는 방법을 제안해주세요."
+    - "한국 개발 환경에 맞는 최적화 방안을 제시해주세요."
 
-# Repository settings
+# Repository settings (한국어)
 repository:
   base_branch: main
   pr_title_template: "feat: {description}"
   pr_body_template: |
-    ## Changes
+    ## 변경사항
     {changes}
     
-    ## Review Notes
+    ## 리뷰 노트
     {review_notes}
     
-    ## Testing Checklist
-    - [ ] Unit tests pass
-    - [ ] Integration tests pass
-    - [ ] Manual testing completed
-    - [ ] Docker build successful
-    - [ ] Redis cache working properly
+    ## 테스트 체크리스트
+    - [ ] 단위 테스트 통과
+    - [ ] 통합 테스트 통과
+    - [ ] 수동 테스트 완료
+    - [ ] Docker 빌드 성공
+    - [ ] Redis 캐시 정상 동작
 
-# Security scanning
+# Security scanning (한국어)
 security:
   enabled: true
   auto_approve: false
@@ -109,4 +119,12 @@ security:
     - oauth2
     - websocket
     - redis
-    - postgresql 
+    - postgresql
+
+# 한국어 피드백 스타일 설정
+feedback:
+  language: korean
+  tone: friendly
+  detail_level: comprehensive
+  include_examples: true
+  use_korean_terminology: true 
